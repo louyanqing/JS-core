@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> new document </title>
+		<meta charset="utf-8"/>
+		<script>
+			var emp={id:1001,name:"eric"};
+			var idDesc=Object.getOwnPropertyDescriptor(emp,"id");
+			console.log(idDesc);
+			var nameDesc=Object.getOwnPropertyDescriptor(emp,"name");
+			console.log(nameDesc);
+			
+			emp.id=1002;
+			console.log(emp);
+			//控制id只读,且禁止将来重新配置id属性的特性
+			Object.defineProperty(emp,"id",{
+				writable:false,
+				configurable:false
+			});
+			emp.id=1003;//强行修改id，查看是否可改成功
+			console.log(emp);//id:1001
+
+			/*Object.definedProperty(emp,"id",{
+				writable:true
+			});//重新定义id的writable属性为：true
+			//执行结果：报错：TypeError:Object.definedProperty is not a function
+			//writable一旦设置为false就不能再重置为true*/
+
+			
+			//定义一个salary属性，在遍历时遍历不到
+			Object.defineProperty(emp,"salary",{
+				value:10000,
+				enumerable:false//规定for in能否便遍历到该属性
+			});
+			console.log(emp);
+			for(var key in emp){
+				console.log(key+":"+emp[key]);
+			}
+			
+			//鄙视题实现clone一个对象的方法:
+			
+			// 浅克隆:仅客隆属性的值，不克隆属性引用的子对象
+			Object.prototype.clone=function(){
+				var obj=new Object();
+				/*for(var iKey in this ){//for in,不仅遍历自有属性，还会遍历共有属性，需加判断
+					if(this.hasOwnProperty(key)){
+						Object.defineProperty(obj,key,{
+						Object.getOwnPropertyDescript(this,key)
+						});
+						//obj[key]=emp[key];//数据属性，没有任何保护
+					}
+					return obj;
+				}*/
+
+				for(var key in this){
+					if(this.hasOwnProperty(key)){
+						if(this[key] instanceof Function){//如果当前属性是一个方法function，则直接复制函数地址
+							obj[key]=this[key];	//只是将地址复制
+						}else{
+							Object.defineProperty(obj,key,
+								Object.getOwnPropertyDescript(this,key)
+							);
+						}
+					}
+					return obj;
+				}
+				
+			}
+			console.log(emp);
+			var cloneEmp=emp.clone();
+			console.log(cloneEmp);
+			cloneEmp.id=1003;//重新定义id的value为1003
+			console.log(cloneEmp);
+
+			//作业：查找深层clone的实现方法
+			//即可克隆数据属性的值，也可将属性引用的其他对象一并克隆
+
+			/* 访问器属性 */
+			//empt._age=30;//先为emp添加一个_age属性---此方法错误
+			Object.defineProperty();
+			emp.age="Hello";//将"hello"保存到age中，自动调用
+			console,log(emp.age);
+		</script>
+	</head>
+	<body>  
+	</body>
+</html>

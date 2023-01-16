@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> 内部属性 </title>
+		<meta charset="utf-8"/>
+		<script>
+			var father={bal:100000000,car:"=B="};
+			var lilei=Object.create(father,{
+				name:{value:"Li Lei",writable:true,enumerable:true,configurable:true},
+				age:{value:11,writable:true,enumerable:true,configurable:true}
+			});
+			var hmm=Object.create(father,{
+				name:{value:"Han Meimei",writable:true,enumerable:true,configurable:true},
+				age:{value:12,writable:true,enumerable:true,configurable:true}
+			});
+			console.log(lilei.bal);
+			console.log(hmm.car);//继承了father属性
+			console.log(lilei);
+			console.log(hmm);
+			console.log(Object.getOwnPropertyDescriptor(lilei,"name"));
+		</script>
+	</head>
+	<body>  
+	</body>
+</html>

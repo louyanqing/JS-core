@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> new document </title>
+		<meta charset="utf-8"/>
+		<script>
+			var emp={};
+			(function(){
+				var _age=33;
+				Object.defineProperties(emp,{
+					id:{value:1001,writable:false,enurable:true,configurable:false},//不写默认false
+					name:{value:"Eric",writable:true,enurable:true,configurable:true},
+					salary:{value:10000,writable:true,enumerable:false,configurable:true},
+					age:{
+						get:function(){return _age},
+						set:function(value){
+							if(isNaN(value)){
+								throw new Error("年龄必须是数字");
+							}else{
+								_age=value;
+							}
+						},//中间少:报错：
+						enurable:true,
+						configurable:true
+				});
+			})();
+			emp.id=1003;//1001
+			for(var key in emp){
+				if(Object.hasOwnPropertyDescriptor(emp,key)){
+					console.log(key+":"+emp[key]);
+				}
+				
+			}//看不到salary
+
+			emp.age="Hello";//抛出错误
+		</script>
+	</head>
+	<body>  
+	</body>
+</html>
