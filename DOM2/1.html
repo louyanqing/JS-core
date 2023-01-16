@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>浏览节点对象的原型链</title>
+<meta charset="utf-8" />
+<script>
+	window.onload=function(){
+		/*var body=document.body;
+		console.log(body);
+		var html=body.parentNode;
+		console.log(html);
+		console.log(body.childNodes);
+		var span=body.firstChild;
+		console.log(span);
+		var h1=span.nextSibling;
+		console.log(h1);
+		console.log(h1.previousSibling==span);//true
+
+		console.log(document.nodeType);//9
+		console.log(body.nodeType); //1
+		console.log(span.firstChild.nodeType); //3
+		console.log(span.firstChild.nodeName); //#text
+		console.log(span.firstChild.nodeValue); //"Hello"
+		console.log(span.nodeName);//SPAN
+		console.log(h1.nodeName);//H1
+		console.log(span.nodeValue); //null*/
+
+		//document.write(document.body.childNodes.length);
+		document.write(document.body.children.length);
+	}
+</script>
+</head>
+<body>
+	<span id="s1">Hello</span>
+	<h1>标题一</h1>
+</body>
+</html>

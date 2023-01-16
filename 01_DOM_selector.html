@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Document</title>
+		<meta charset="UTF-8">
+	  
+	</head>
+	<body>
+		
+		<div id="news">
+			<p class="mainTitle">新闻标题1</p>
+			<p class="subTitle">新闻标题2</p>
+			<p class="mainTitle">新闻标题3</p>
+		</div>
+		<script>
+			var div=document.getElementById("news");
+			var ps1=div.querySelector(".mainTitle,.subTitle");
+			console.log(ps1);
+			var ps2=div.querySelectorAll('.mainTitle,.subTitle');
+			console.log(ps2.length);
+		</script>
+	</body>
+</html>
